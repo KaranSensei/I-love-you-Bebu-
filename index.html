@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Be My Valentine 💘</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      font-family: "Comic Sans MS", cursive, sans-serif;
+      overflow: hidden;
+    }
+
+    .container {
+      text-align: center;
+      z-index: 2;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      color: #b30059;
+      margin-bottom: 8px;
+    }
+
+    h2 {
+      font-size: 2.2rem;
+      color: #6a0572;
+      margin-bottom: 12px;
+    }
+
+    .joke {
+      font-size: 1.8rem;
+      color: #ff2f92;
+      margin-bottom: 25px;
+    }
+
+    .pulse-heart {
+      display: inline-block;
+      animation: pulse 1.2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.35); }
+      100% { transform: scale(1); }
+    }
+
+    button {
+      font-size: 1.6rem;
+      padding: 14px 32px;
+      border: none;
+      border-radius: 40px;
+      cursor: pointer;
+      transition: 0.2s ease;
+      position: absolute;
+    }
+
+    #yesBtn {
+      background-color: #ff4d88;
+      color: white;
+      position: relative;
+    }
+
+    #noBtn {
+      background-color: white;
+      color: #b30059;
+    }
+
+    .message {
+      font-size: 2.5rem;
+      color: #b30059;
+      margin-top: 30px;
+      display: none;
+    }
+
+    /* Floating hearts & kisses */
+    .heart {
+      position: fixed;
+      top: -10px;
+      font-size: 28px;
+      animation: fall linear forwards;
+      z-index: 1;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>
+      I love you Bebu <span class="pulse-heart">💜</span>
+    </h1>
+
+    <div class="joke">
+      Bebu tebu tw khatra ho 😘💜
+    </div>
+
+    <h2>Will you be my Valentine 🫴💜</h2>
+
+    <button id="yesBtn">Yes 💕</button>
+    <button id="noBtn">No 🙄</button>
+
+    <div class="message" id="message">
+      Chuppa Bebu, I love you 💜💜💋💋💋
+    </div>
+  </div>
+
+  <script>
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    const message = document.getElementById("message");
+
+    function moveNoButton() {
+      const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+      const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+      noBtn.style.left = `${x}px`;
+      noBtn.style.top = `${y}px`;
+    }
+
+    noBtn.addEventListener("mouseover", moveNoButton);
+    noBtn.addEventListener("click", moveNoButton);
+
+    function createLove() {
+      const love = document.createElement("div");
+      love.classList.add("heart");
+      love.innerText = Math.random() > 0.5 ? "💜" : "💋";
+      love.style.left = Math.random() * 100 + "vw";
+      love.style.animationDuration = Math.random() * 2 + 2.5 + "s";
+      document.body.appendChild(love);
+
+      setTimeout(() => love.remove(), 5000);
+    }
+
+    // gentle floating before YES
+    setInterval(createLove, 500);
+
+    yesBtn.addEventListener("click", () => {
+      message.style.display = "block";
+      yesBtn.style.display = "none";
+      noBtn.style.display = "none";
+
+      // FULL HEART + KISS STORM 💜💋
+      for (let i = 0; i < 150; i++) {
+        setTimeout(createLove, i * 70);
+      }
+    });
+  </script>
+
+</body>
+</html>
